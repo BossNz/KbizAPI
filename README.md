@@ -2,7 +2,7 @@
 Unofficial Kbiz's API.
 
 ## Examples
-
+ก่อนใช้งาน จำเป็นต้องลง axios ก่อน
 ```js
 var kbizapi = require("./kbiz.class");
 
