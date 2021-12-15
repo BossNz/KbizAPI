@@ -15,11 +15,13 @@ var kbankapi = require("./kbank.class");
       token:"",
     };
     var kbank = new kbankapi(config);
-    // console.log(await kbank.Login()); // login เพื่อได้ token กับ ibId ไว้ดึงข้อมูล ( array )
+    console.log(await kbank.Login()); // login เพื่อได้ token กับ ibId ไว้ดึงข้อมูล ( array )
 
-    // console.log(await kbank.GetInfoUser()); // ดูข้อมูลผู้ใช้งานตรวจสอบยอดคงเหลือ ( array )
-    // console.log(await kbank.CheckSession()); // ตรวจสอบว่า token ตาย ( boolean )
-    // console.log(await kbank.getTransactionList()); // ดูประวัติการโอนและรับเงิน ( array )
+    console.log(await kbank.CheckSession()); // ตรวจสอบว่า token ตาย ( boolean )
+
+    console.log(await kbank.GetInfoUser()); // ดูข้อมูลผู้ใช้งานตรวจสอบยอดคงเหลือ ( array )
+    
+    console.log(await kbank.getTransactionList()); // ดูประวัติการโอนและรับเงิน ( array )
 
 })();
 
