@@ -4,7 +4,7 @@ Unofficial Kbiz's API.
 ## Examples
 
 ```js
-var kbankapi = require("./kbank.class");
+var kbizapi = require("./kbiz.class");
 
 (async()=>{
     var config = {
@@ -14,17 +14,16 @@ var kbankapi = require("./kbank.class");
       ibId: "",
       token:"",
     };
-    var kbank = new kbankapi(config);
-    console.log(await kbank.Login()); // login เพื่อได้ token กับ ibId ไว้ดึงข้อมูล ( array )
+    var kbiz = new kbizapi(config);
+    console.log(await kbiz.Login()); // login เพื่อได้ token กับ ibId ไว้ดึงข้อมูล ( array )
 
-    console.log(await kbank.CheckSession()); // ตรวจสอบว่า token ตาย ( boolean )
+    console.log(await kbiz.CheckSession()); // ตรวจสอบว่า token ตาย ( boolean )
 
-    console.log(await kbank.GetInfoUser()); // ดูข้อมูลผู้ใช้งานตรวจสอบยอดคงเหลือ ( array )
+    console.log(await kbiz.GetInfoUser()); // ดูข้อมูลผู้ใช้งานตรวจสอบยอดคงเหลือ ( array )
     
-    console.log(await kbank.getTransactionList()); // ดูประวัติการโอนและรับเงิน ( array )
+    console.log(await kbiz.getTransactionList()); // ดูประวัติการโอนและรับเงิน ( array )
 
 })();
-
 ```
 
 ## WARNING
