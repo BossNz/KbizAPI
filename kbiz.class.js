@@ -83,10 +83,11 @@ class kbiz {
             data.transCode,
             data.transType
           );
-          return result;
+          return result.data
         })
       );
-      return transactioncallback;
+
+      return transactioncallback.filter((array)=>{return array.bankNameTh});
     } catch (e) {
       return false;
     }
