@@ -10,8 +10,12 @@ class kbiz {
     this.accountnumber = config.accountnumber;
     this.ibId = config.ibId;
     this.token = config.token;
-    axios.defaults.headers.common["Authorization"] = config.token;
-    axios.defaults.headers.common["X-IB-ID"] = config.ibId;
+    config.token
+      ? (axios.defaults.headers.common["Authorization"] = config.token)
+      : null;
+    config.ibId
+      ? (axios.defaults.headers.common["X-IB-ID"] = config.ibId)
+      : null;
   }
   async Login() {
     try {
@@ -69,8 +73,52 @@ class kbiz {
           startDate: startDate ? startDate : Datenow,
         }
       );
-      return gettranstion.data.data;
+      const transactioncallback = await Promise.all(
+        gettranstion.data.data.recentTransactionList.map(async (data) => {
+          var result = await this.getRecentTransactionDetail(
+            data.transDate,
+            data.origRqUid,
+            data.originalSourceId,
+            data.debitCreditIndicator,
+            data.transCode,
+            data.transType
+          );
+          return result;
+        })
+      );
+      return transactioncallback;
     } catch (e) {
+      return false;
+    }
+  }
+
+  async getRecentTransactionDetail(
+    transDate,
+    origRqUid,
+    originalSourceId,
+    debitCreditIndicator,
+    transCode,
+    transType
+  ) {
+    try {
+      var { data } = await axios.post(
+        "/api/accountsummary/getRecentTransactionDetail",
+        {
+          transDate: transDate.split(" ")[0],
+          acctNo: this.accountnumber,
+          origRqUid: origRqUid,
+          custType: "I",
+          originalSourceId: originalSourceId,
+          transCode: transCode,
+          debitCreditIndicator: debitCreditIndicator,
+          transType: transType,
+          ownerType: "Retail",
+          ownerId: this.ibId,
+        }
+      );
+      return data;
+    } catch (e) {
+      console.log(e);
       return false;
     }
   }
