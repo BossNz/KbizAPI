@@ -54,9 +54,8 @@ class kbiz {
   }
   async getTransactionList(limitrow = 7, startDate = null, endDate = null) {
     var today = new Date();
-    const Datenow = `${today.getDate()}/${
-      today.getMonth() + 1
-    }/${today.getFullYear()}`;
+    var month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const Datenow = `${today.getDate()}/${month}/${today.getFullYear()}`;
     try {
       var gettranstion = await axios.post(
         "/api/accountsummary/getRecentTransactionList",
